@@ -1,4 +1,4 @@
-    node('REDHAT'){
+    node('Master'){
         stage('scm'){
             git 'https://github.com/Abhilash-ops/game-of-life.git'
         }
