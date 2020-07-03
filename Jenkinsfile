@@ -3,7 +3,7 @@
             git 'https://github.com/Abhilash-ops/game-of-life.git'
         }
         stage('build'){
-            sh label: '', script: 'mvn clean package'
+            bat label: '', script: 'call mvn clean package'
         }
         
     }
