@@ -1,16 +1,15 @@
 pipeline{
     agent{label 'Master'}
+    triggers{ pollSCM('* * * * *')}
     stages{
-        stage('Source'){
+        stage('Clone and Compile'){
             steps{
-                git 'https://github.com/Abhilash-ops/game-of-life.git'
+                git branch: 'declarative',
+                url: 'https://github.com/Abhilash-ops/game-of-life.git'
+                bat label: '', script: 'call mvn package'
+
             }
             
-        }
-        stage('Package'){
-            steps{
-                bat label: '', script: 'call mvn package'
-            }
         }
     }
 }
