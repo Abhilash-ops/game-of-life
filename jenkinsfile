@@ -1,15 +1,20 @@
 pipeline{
     agent{label 'Master'}
-    triggers{ pollSCM('* * * * *')}
+    triggers{ 
+        upstream(upstreamProjects: 'gol', threshold: hudson.model.Result.SUCCESS)
+        }
     stages{
-        stage('Clone and Compile'){
+        stage('Source'){
             steps{
-                git branch: 'declarative',
-                url: 'https://github.com/Abhilash-ops/game-of-life.git'
-                bat label: '', script: 'call mvn package'
+                git 'https://github.com/Abhilash-ops/game-of-life.git'                
 
             }
             
+        }
+        stage('Package'){
+            steps{
+                bat label: '', script: 'call mvn package'
+            }
         }
     }
 }
