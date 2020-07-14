@@ -14,6 +14,8 @@ pipeline{
         stage('Package'){
             steps{
                 bat label: '', script: 'call mvn package'
+                input 'continue to next step?'
+				archiveArtifacts 'target/*.jar'
             }
         }
     }
